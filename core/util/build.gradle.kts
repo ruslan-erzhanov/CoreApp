@@ -1,0 +1,7 @@
+plugins {
+    `library-build`
+}
+
+
+dependencies {
+}
