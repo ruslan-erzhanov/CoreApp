@@ -1,7 +1,0 @@
-plugins {
-    `library-build`
-}
-
-
-dependencies {
-}

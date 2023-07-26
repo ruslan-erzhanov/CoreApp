@@ -6,4 +6,5 @@ object Build {
     const val androidGP = "com.android.tools.build:gradle:$androidPluginVersion"
     const val androidApp = "com.android.application"
     const val androidLib = "com.android.library"
+    const val serializationPlugin = "plugin.serialization"
 }

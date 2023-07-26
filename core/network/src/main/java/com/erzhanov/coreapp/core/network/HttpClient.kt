@@ -2,15 +2,17 @@ package com.erzhanov.coreapp.core.network
 
 import com.ihsanbal.logging.Level
 import com.ihsanbal.logging.LoggingInterceptor
-import io.ktor.client.*
-import io.ktor.client.engine.okhttp.*
-import io.ktor.client.features.*
-import io.ktor.client.features.json.*
-import io.ktor.client.features.json.serializer.*
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logging
-import io.ktor.client.request.*
-import io.ktor.http.*
+import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.HttpRequestRetry
+import io.ktor.client.plugins.HttpResponseValidator
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.http.ContentType
+import io.ktor.http.URLProtocol
+import io.ktor.http.contentType
+import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import okhttp3.Authenticator
 import okhttp3.Interceptor
@@ -35,11 +37,13 @@ fun getHttpClient(
 
     return HttpClient(OkHttp) {
 
-        Logging {
-            level = if (isDebug) LogLevel.INFO else LogLevel.NONE
+        install(ContentNegotiation) {
+            json(json)
         }
-        Json {
-            serializer = KotlinxSerializer(json)
+
+        install(HttpRequestRetry) {
+            retryOnServerErrors(maxRetries = 3)
+            exponentialDelay()
         }
 
         defaultRequest {
@@ -51,9 +55,8 @@ fun getHttpClient(
         }
 
         HttpResponseValidator {
-            handleResponseException { exception ->
-                val clientException = exception as? ClientRequestException
-                    ?: return@handleResponseException
+            handleResponseExceptionWithRequest { exception, _ ->
+                val clientException = exception as? ClientRequestException ?: return@handleResponseExceptionWithRequest
                 errorResponseHandler(clientException)
             }
         }

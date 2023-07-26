@@ -7,9 +7,10 @@ object Compose {
 
     const val kotlinCompilerVersion = "1.4.8"
 
-    const val platformBom = "androidx.compose:compose-bom:2022.10.00"
-    const val composeLibsVersion = "1.2.0"
+    private const val composeBomVersion = "2023.06.01"
+    const val platformBom = "androidx.compose:compose-bom:$composeBomVersion"
     const val ui = "androidx.compose.ui:ui"
+    const val animation = "androidx.compose.animation:animation"
     const val graphics = "androidx.compose.ui:ui-graphics"
     const val tooling = "androidx.compose.ui:ui-tooling"
     const val toolingPreview = "androidx.compose.ui:ui-tooling-preview"

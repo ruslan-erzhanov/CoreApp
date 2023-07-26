@@ -7,9 +7,8 @@ android {
 }
 dependencies {
     implementation(project(Modules.dataCommon))
-    implementation(Ktor.core)
     implementation(Ktor.okhttp)
-    implementation(Ktor.clientSerialization)
+    implementation(Ktor.negotiation)
     implementation(Ktor.logging)
     implementation(Ktor.externalLogging) {
         exclude("org.json", "json")

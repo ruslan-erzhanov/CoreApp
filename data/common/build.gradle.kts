@@ -1,9 +1,9 @@
 plugins {
     `library-build`
-    kotlin(KotlinPlugins.serialization) version Build.kotlinVersion
+    kotlin(Build.serializationPlugin) version Build.kotlinVersion
 }
 
 dependencies {
-    implementation(Ktor.core)
-    implementation(Ktor.clientSerialization)
+    api(Ktor.core)
+    api(Ktor.clientSerialization)
 }

@@ -1,11 +1,10 @@
 package com.erzhanov.coreapp.core.network
 
-import android.os.Build
+import com.erzhanov.coreapp.core.network.ApiContract.Headers
 import com.erzhanov.coreapp.data.common.prefs.PrefsDataSource
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,36 +16,25 @@ class DefaultHeadersInterceptor @Inject constructor(
 ) : HeadersInterceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val requestBuilder = runBlocking {
 
+        //Current api doesn't require any of headers, just mocking this flow
+        val requestBuilder = runBlocking {
             chain.request().newBuilder().apply {
-                //header("client-version", BuildConfig.VERSION_NAME)
-                //header("platform", "android")
-                //header("uuid", prefsDataSource.getDeviceUUID())
-                header("debug", isDebug.toString())
-                header("version", "1")
-                header("x-api-key", apiKey)
-                prefsDataSource.getUserToken()?.let { token ->
-                    header("token", token)
+
+                //todo:remove mocking code
+                if (isDebug) return@apply
+
+                header(Headers.PLATFORM, "android")
+                header(Headers.UUID, prefsDataSource.getDeviceUUID())
+                header(Headers.DEBUG, isDebug.toString())
+                header(Headers.VERSION, "1")
+                if (apiKey.isNotEmpty()) header(Headers.API_KEY, apiKey)
+                prefsDataSource.getUserToken().takeUnless { it.isNullOrEmpty() }?.let { token ->
+                    header(Headers.AUTHORIZATION, "${Headers.BEARER}$token")
                 }
             }
         }
 
         return chain.proceed(requestBuilder.build())
-    }
-
-    private fun getDeviceInfo(): String {
-        val manufacturer: String = Build.MANUFACTURER
-        val model: String = Build.MODEL
-        val locale = Locale.getDefault()
-        val modelInfo = if (model.lowercase(locale).startsWith(manufacturer.lowercase(locale))) {
-            model
-        } else {
-            "$manufacturer $model"
-        }.replaceFirstChar {
-            if (it.isLowerCase()) it.titlecase(locale) else it.toString()
-        }
-
-        return "$modelInfo (Android ${Build.VERSION.RELEASE})"
     }
 }

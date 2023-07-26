@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CoreApp</string>
+    <string name="explore_title">Explore</string>
+    <string name="saved_title">Saved</string>
+    <string name="get_started">Get Started</string>
+    <string name="already_have_account">I already have an account</string>
+    <string name="empty_list_msg">Begin your adventure to see recent activities here</string>
+    <string name="error_list_msg">Something went wrong, please try again</string>
+    <string name="retry">Retry</string>
+</resources>

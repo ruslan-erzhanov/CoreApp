@@ -2,7 +2,7 @@ object Android {
     const val appId = "com.erzhanov.coreapp"
     const val compileSdk = 33
     const val buildTools = "30.0.3"
-    const val minSdk = 24
+    const val minSdk = 26
     const val targetSdk = 32
     private const val versionMajor = 0
     private const val versionMinor = 0

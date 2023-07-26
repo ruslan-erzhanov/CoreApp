@@ -55,4 +55,6 @@ dependencies{
 
     implementation(Hilt.android)
     kapt(Hilt.compiler)
+
+    debugImplementation(Compose.tooling)
 }

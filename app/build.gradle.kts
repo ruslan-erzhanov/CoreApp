@@ -3,6 +3,7 @@ plugins {
     kotlin("kapt")
     kotlin("android")
     id(Hilt.plagin)
+    kotlin(Build.serializationPlugin) version Build.kotlinVersion
 }
 
 android {
@@ -23,8 +24,16 @@ android {
     }
 
     buildTypes {
-        release {
+
+        debug {
             isMinifyEnabled  = false
+            buildConfigField(ConfigVariables.Names.baseHost, ConfigVariables.Debug.baseHost)
+            buildConfigField(ConfigVariables.Names.apiKey, ConfigVariables.Debug.apiKey)
+        }
+        release {
+            buildConfigField(ConfigVariables.Names.baseHost, ConfigVariables.Release.baseHost)
+            buildConfigField(ConfigVariables.Names.apiKey, ConfigVariables.Release.apiKey)
+            isMinifyEnabled  = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -55,9 +64,17 @@ kapt {
 
 dependencies {
 
-    implementation(AndroidX.coreKtx)
+    implementation(project(Modules.dataCommon))
+    implementation(project(Modules.coreBase))
+    implementation(project(Modules.appAuth))
+    implementation(project(Modules.appReddits))
+
     implementation(platform(Kotlin.BOM))
+    implementation(AndroidX.coreKtx)
+
     implementation(AndroidX.lifecycleVmKtx)
+    implementation(AndroidX.datastore)
+
     implementation(platform(Compose.platformBom))
     implementation(Compose.activity)
     implementation(Compose.ui)
@@ -66,6 +83,12 @@ dependencies {
     implementation(Compose.material3)
     implementation(Compose.navigation)
     implementation(Compose.hiltNavigation)
+
+    implementation(Coil.coil)
+
+    implementation(Accompanist.animations)
+    implementation(Accompanist.material)
+
     implementation(Hilt.android)
     kapt(Hilt.compiler)
 

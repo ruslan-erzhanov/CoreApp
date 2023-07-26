@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.`kotlin-dsl`
-
 plugins {
     `kotlin-dsl`
 }
@@ -18,4 +16,7 @@ dependencies {
     val androidGP = "com.android.tools.build:gradle:$androidPluginVersion"
     implementation(androidGP)
     implementation(kotlinGradlePlugin)
+    // to fix 'java.lang.String com.squareup.javapoet.ClassName.canonicalName()'
+    // https://github.com/google/dagger/issues/3068
+    implementation("com.squareup:javapoet:1.13.0")
 }
