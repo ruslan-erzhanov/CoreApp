@@ -17,8 +17,10 @@ dependencyResolutionManagement {
 }
 rootProject.name = "CoreApp"
 include("app")
-include("app:_auth")
-include("app:_reddits")
+
+include("feature")
+include("feature:auth")
+include("feature:reddits")
 
 include("core")
 include("core:network")

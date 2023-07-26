@@ -5,6 +5,7 @@ plugins {
 android {
     namespace = "com.erzhanov.coreapp.core.network"
 }
+
 dependencies {
     implementation(project(Modules.dataCommon))
     implementation(Ktor.okhttp)

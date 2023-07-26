@@ -1,5 +1,5 @@
 plugins {
-    `android-library-build`
+    `android-feature-build`
 }
 
 android {

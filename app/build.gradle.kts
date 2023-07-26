@@ -66,8 +66,8 @@ dependencies {
 
     implementation(project(Modules.dataCommon))
     implementation(project(Modules.coreBase))
-    implementation(project(Modules.appAuth))
-    implementation(project(Modules.appReddits))
+    implementation(project(Modules.featureAuth))
+    implementation(project(Modules.featureReddits))
 
     implementation(platform(Kotlin.BOM))
     implementation(AndroidX.coreKtx)

@@ -25,7 +25,12 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
-
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = Compose.kotlinCompilerVersion
+    }
     packaging {
         resources.excludes.add("META-INF/AL2.0")
         resources.excludes.add("META-INF/LGPL2.1")
@@ -34,6 +39,22 @@ android {
 
 dependencies{
 
+    implementation(AndroidX.coreKtx)
+    implementation(AndroidX.appCompat)
+    implementation(AndroidX.lifecycleVmKtx)
+
+
+    implementation(platform(Compose.platformBom))
+    implementation(Compose.constraintLayout)
+    implementation(Compose.activity)
+    implementation(Compose.ui)
+    implementation(Compose.graphics)
+    implementation(Compose.toolingPreview)
+    implementation(Compose.material3)
+    implementation(Compose.navigation)
+
     implementation(Hilt.android)
     kapt(Hilt.compiler)
+
+    debugImplementation(Compose.tooling)
 }

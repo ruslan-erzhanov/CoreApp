@@ -1,8 +1,10 @@
 object Modules {
 
-    const val app = ":app"
-    const val appAuth = "$app:_auth"
-    const val appReddits = "$app:_reddits"
+    private const val app = ":app"
+
+    private const val feature = ":feature"
+    const val featureAuth = "$feature:auth"
+    const val featureReddits = "$feature:reddits"
 
     private const val core = ":core"
     const val coreNetwork = "$core:network"

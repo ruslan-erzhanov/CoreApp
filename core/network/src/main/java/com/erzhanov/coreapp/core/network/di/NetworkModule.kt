@@ -1,5 +1,8 @@
-package com.erzhanov.coreapp.core.network
+package com.erzhanov.coreapp.core.network.di
 
+import com.erzhanov.coreapp.core.network.getHttpClient
+import com.erzhanov.coreapp.core.network.interceptors.DefaultHeadersInterceptor
+import com.erzhanov.coreapp.core.network.interceptors.HeadersInterceptor
 import com.erzhanov.coreapp.data.common.AppInfoProvider
 import com.erzhanov.coreapp.data.common.prefs.PrefsDataSource
 import dagger.Module

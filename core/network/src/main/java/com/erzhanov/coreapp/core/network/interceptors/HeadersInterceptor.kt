@@ -1,4 +1,4 @@
-package com.erzhanov.coreapp.core.network
+package com.erzhanov.coreapp.core.network.interceptors
 
 import okhttp3.Interceptor
 

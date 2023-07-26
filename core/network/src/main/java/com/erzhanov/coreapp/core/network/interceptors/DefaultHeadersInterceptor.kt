@@ -1,4 +1,4 @@
-package com.erzhanov.coreapp.core.network
+package com.erzhanov.coreapp.core.network.interceptors
 
 import com.erzhanov.coreapp.core.network.ApiContract.Headers
 import com.erzhanov.coreapp.data.common.prefs.PrefsDataSource

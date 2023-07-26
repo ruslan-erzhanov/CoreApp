@@ -5,6 +5,13 @@ plugins {
 
 android {
     namespace = "com.erzhanov.coreapp.data.storage"
+    defaultConfig {
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
+    }
 }
 
 dependencies {
